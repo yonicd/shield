@@ -1,0 +1,19 @@
+Package: shield
+Type: Package
+Title: Full Remote Installation
+Version: 0.0.1
+Authors@R: person(given = "Jonathan", family = "Sidi", role = c("cre","aut"), email = "yonicd@gmail.com")
+Description: Utility package to install a package only from remote repositories.
+Depends: R (>= 3.6.0)
+Imports: httr,base64enc,desc,remotes,utils,stats
+URL: https://github.com/yonicd/shield
+BugReports: https://github.com/yonicd/shield/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+License: MIT + file LICENSE

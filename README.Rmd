@@ -1,0 +1,94 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# shield
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The goal of shield is to create a simple workflow to install package first level dependencies exclusively from github remote repositories when available.
+
+## Installation
+
+The development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("yonicd/shield")
+```
+## Example
+
+```{r}
+library(shield)
+library(details)
+```
+
+Map the dependencies to the github remote repositories and the current master sha
+
+```{r}
+desc_map <- create_map('DESCRIPTION')
+```
+
+```{r}
+desc_map
+```
+
+Create a temp libpath to install to
+
+```{r}
+test_lib <- file.path(tempdir(),'mylib')
+dir.create(test_lib)
+```
+
+Install the dependencies
+
+```{r,eval = FALSE}
+install_remotes(obj = desc_map,lib = test_lib)
+```
+
+<details><summary>Click To See Console Output</summary>
+
+```{r, echo = FALSE}
+install_remotes(obj = desc_map,lib = test_lib)
+```
+
+</details>
+
+<br>
+
+Install the package
+
+```{r}
+remotes::install_local(lib = test_lib,force = TRUE, upgrade = TRUE)
+```
+
+Check to see that everything was installed
+
+```{r}
+list.files(test_lib)
+```
+
+Check session_info of the default current libpath
+
+```{details}
+sessioninfo::package_info(list.files(test_lib))
+```
+
+Check session_info of the temp libpath
+
+```{details}
+withr::with_libpaths(test_lib,sessioninfo::package_info(list.files(test_lib)))
+```
