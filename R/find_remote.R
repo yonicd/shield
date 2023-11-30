@@ -1,7 +1,7 @@
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param dep PARAM_DESCRIPTION
-#' @param pat PARAM_DESCRIPTION, Default: Sys.getenv("GITHUB_PAT")
+#' @param pat PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples
@@ -12,11 +12,16 @@
 #' }
 #' @rdname find_remote
 #' @export
+find_remote <- function(dep, pat = Sys.getenv('GITHUB_PAT')){
+
+  repo_sha(find_repo(dep, pat))
+
+}
+
 #' @importFrom httr GET add_headers stop_for_status content
 #' @importFrom base64enc base64decode
 #' @importFrom stats setNames
-find_remote <- function(dep, pat = Sys.getenv('GITHUB_PAT')){
-
+find_repo <- function(dep, pat = Sys.getenv('GITHUB_PAT')){
   res_cran <- httr::GET(
     url = make_cran_uri(dep),
     httr::add_headers(
@@ -35,6 +40,5 @@ find_remote <- function(dep, pat = Sys.getenv('GITHUB_PAT')){
   if(!length(repo))
     return(stats::setNames(NA_character_,dep))
 
-  repo_sha(repo)
-
+  repo
 }
