@@ -1,7 +1,7 @@
 Package: shield
 Type: Package
 Title: Full Remote Installation
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person(given = "Jonathan", family = "Sidi", role = c("cre","aut"), email = "yonicd@gmail.com")
 Description: Utility package to install a package only from remote repositories.
 Depends: R (>= 3.6.0)
