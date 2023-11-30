@@ -18,6 +18,8 @@ find_remote <- function(dep, pat = Sys.getenv('GITHUB_PAT')){
 
 }
 
+#' @rdname find_remote
+#' @export
 #' @importFrom httr GET add_headers stop_for_status content
 #' @importFrom base64enc base64decode
 #' @importFrom stats setNames
